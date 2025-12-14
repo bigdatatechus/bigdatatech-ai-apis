@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BigData Tech Consulting - AI APIs for Sensor-Based Industry</title>
+  <meta name="description" content="I help sensor, IoT, and condition-monitoring teams ship production-grade AI APIs for time-series analytics, anomaly detection, and failure prediction—fast." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2e;
+      --muted:#a9b4c7;
+      --text:#eef3ff;
+      --accent:#66e3ff;
+      --accent2:#8cffc1;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 20px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1120px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(102,227,255,.16), transparent 55%),
+        radial-gradient(1100px 650px at 90% 20%, rgba(140,255,193,.12), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(120,140,255,.10), transparent 60%),
+        var(--bg);
+      line-height:1.45;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px 20px 80px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+    }
+    .logo{
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(102,227,255,.95), rgba(140,255,193,.85));
+      box-shadow:0 10px 30px rgba(102,227,255,.12);
+    }
+    .brand strong{display:block; font-size:15px; letter-spacing:.2px}
+    .brand span{display:block; font-size:12px; color:var(--muted)}
+    .nav{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .nav a{
+      text-decoration:none; font-size:13px; color:var(--muted);
+      padding:8px 10px; border-radius:999px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{border-color:var(--line); color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 14px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:13px;
+    }
+    .btn.primary{
+      border-color:transparent;
+      background: linear-gradient(135deg, rgba(102,227,255,.95), rgba(140,255,193,.85));
+      color:#06111f;
+      box-shadow:0 18px 40px rgba(102,227,255,.10);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:22px;
+      align-items:stretch;
+      margin-top:18px;
+    }
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .hero h1{
+      margin:0 0 10px 0;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.7px;
+    }
+    @media (max-width: 520px){
+      .hero h1{font-size:36px}
+    }
+    .hero p{
+      margin:12px 0 0 0;
+      color:var(--muted);
+      font-size:16px;
+      max-width:62ch;
+    }
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .pill{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:rgba(238,243,255,.9);
+      background:rgba(255,255,255,.03);
+    }
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .side h3{margin:0 0 10px 0; font-size:15px}
+    .side .muted{color:var(--muted); font-size:13px; margin:0 0 12px 0}
+    .stat{
+      display:flex; gap:12px; align-items:flex-start;
+      border-top:1px solid var(--line);
+      padding-top:14px; margin-top:14px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background:rgba(102,227,255,.95);
+      margin-top:5px;
+      box-shadow:0 0 0 6px rgba(102,227,255,.10);
+    }
+    .stat strong{display:block; font-size:13px}
+    .stat span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
+    .kicker{
+      color:rgba(102,227,255,.95);
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:11px;
+    }
+    h2{margin:0 0 8px 0; font-size:22px; letter-spacing:-.2px}
+    .section{margin-top:30px}
+    .list{
+      margin:0; padding-left:18px; color:var(--muted); font-size:14px;
+    }
+    .list li{margin:8px 0}
+    .twoCol{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    @media (max-width: 900px){ .twoCol{grid-template-columns:1fr} }
+    .mini{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:16px;
+      padding:16px;
+    }
+    .mini h3{margin:0 0 8px 0; font-size:15px}
+    .mini p{margin:0; color:var(--muted); font-size:13px}
+    .tag{
+      display:inline-flex; align-items:center;
+      font-size:11px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      color:rgba(238,243,255,.92);
+      background:rgba(255,255,255,.02);
+      margin-top:12px;
+    }
+    .pricing{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:14px;
+    }
+    @media (max-width: 980px){ .pricing{grid-template-columns:1fr} }
+    .price{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(15,26,46,.55);
+    }
+    .price h3{margin:0 0 6px 0; font-size:16px}
+    .price .amt{font-size:28px; font-weight:800; letter-spacing:-.4px}
+    .price .amt small{font-size:13px; font-weight:700; color:var(--muted)}
+    .price p{margin:10px 0 0 0; color:var(--muted); font-size:13px}
+    .price ul{margin:12px 0 0 0; padding-left:18px; color:var(--muted); font-size:13px}
+    .price li{margin:7px 0}
+    .faq{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px;
+    }
+    @media (max-width: 980px){ .faq{grid-template-columns:1fr} }
+    details{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 14px;
+      background:rgba(255,255,255,.02);
+    }
+    summary{cursor:pointer; font-weight:700; font-size:13px}
+    details p{margin:10px 0 0 0; color:var(--muted); font-size:13px}
+    .footer{
+      margin-top:36px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      color:var(--muted); font-size:12px;
+    }
+    .form{
+      display:grid; gap:10px; margin-top:12px;
+    }
+    .input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      font-size:13px;
+      outline:none;
+    }
+    .input:focus{border-color:rgba(102,227,255,.55)}
+    textarea.input{min-height:96px; resize:vertical}
+    .note{font-size:12px; color:var(--muted); margin-top:10px}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; font-weight:700;
+      border-radius:999px; padding:8px 10px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:rgba(238,243,255,.92);
+    }
+    .badge i{
+      width:10px; height:10px; border-radius:99px;
+      background:rgba(140,255,193,.9);
+      box-shadow:0 0 0 6px rgba(140,255,193,.10);
+      display:inline-block;
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="topbar">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>BigData Tech Consulting</strong>
+          <span>AI APIs for Sensor and Condition Monitoring</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#usecases">Use cases</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Engagement</a>
+        <a href="https://calendar.app.google/anXNomcbPJWZe6Bq9" target="_blank" class="btn primary">Book a call</a>
+      </nav>
+    </header>
+
+    <main id="top" class="hero">
+      <section class="card">
+        <div class="badge"><i></i> Production-grade AI APIs - Time-series + Vibration + IoT</div>
+        <h1>Ship failure prediction and anomaly detection APIs your customers can trust.</h1>
+        <p>
+          I help sensor vendors, CMMS/EAM platforms, and industrial reliability teams turn raw vibration/temperature signals into
+          <strong>actionable predictions</strong> - delivered as clean, secure, scalable APIs.
+        </p>
+
+        <div class="pillrow">
+          <div class="pill">Time-series modeling</div>
+          <div class="pill">Waveform ingestion</div>
+          <div class="pill">Anomaly and fault classification</div>
+          <div class="pill">Edge + Cloud patterns</div>
+          <div class="pill">MLOps, monitoring, SLAs</div>
+          <div class="pill">Security and governance</div>
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#contact">Get a 30-min API feasibility call</a>
+          <a class="btn" href="https://www.linkedin.com/in/govip/" target="_blank" rel="noreferrer">View LinkedIn</a>
+          <a class="btn" href="#services">See services</a>
+        </div>
+
+        <p class="note">
+          <span class="mono">Typical outcomes:</span> faster product roadmap delivery, fewer false alarms, higher uptime, and smoother integrations for your customers.
+        </p>
+      </section>
+
+      <aside class="card side">
+        <h3>Why teams hire me</h3>
+        <p class="muted">
+          A senior software/AI builder who focuses on <strong>shipping</strong> - from data pipelines to reliable APIs to operational monitoring.
+        </p>
+
+        <div class="stat">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <strong>Production-first engineering</strong>
+            <span>Security, observability, versioning, SLAs - built in from day one.</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="dot" aria-hidden="true" style="background:rgba(140,255,193,.9)"></div>
+          <div>
+            <strong>Time-series + sensors focus</strong>
+            <span>Vibration trends, spectral features, temperature correlation, drift and seasonality.</span>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="dot" aria-hidden="true" style="background:rgba(120,140,255,.9)"></div>
+          <div>
+            <strong>Exec-friendly outputs</strong>
+            <span>Clear ROI framing: downtime cost, MTBF/MTTR impact, rollout plan.</span>
+          </div>
+        </div>
+
+        <div class="note">
+          Background snapshot: "Results-driven leader with 15+ years of expertise building secure, scalable platforms." (from LinkedIn snippet)
+        </div>
+      </aside>
+    </main>
+
+    <section id="services" class="section">
+      <div class="card">
+        <div class="kicker">Services</div>
+        <h2>How I help sensor and reliability teams</h2>
+        <p class="muted" style="margin:0">
+          Choose what you need now - start small, prove value, then scale.
+        </p>
+
+        <div class="grid3">
+          <div class="mini">
+            <h3>AI API Discovery Sprint (2 weeks)</h3>
+            <p>Define the smallest follower product: inputs, outputs, metrics, data needs, and a practical plan to ship.</p>
+            <div class="tag">Deliverable: spec + roadmap + ROI model</div>
+          </div>
+          <div class="mini">
+            <h3>Predictive Maintenance API (6-8 weeks)</h3>
+            <p>Waveform/time-series ingestion -> feature pipeline -> model -> API -> monitoring. Built for real operations and noisy data.</p>
+            <div class="tag">Deliverable: production-ready API + pilot</div>
+          </div>
+          <div class="mini">
+            <h3>MLOps and Reliability Hardening</h3>
+            <p>Model/version management, drift detection, alerting, dashboards, and security posture to meet enterprise expectations.</p>
+            <div class="tag">Deliverable: SLAs + observability + governance</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="usecases" class="section">
+      <div class="card">
+        <div class="kicker">Use cases</div>
+        <h2>High-value APIs you can offer your customers</h2>
+        <div class="twoCol" style="margin-top:12px">
+          <div class="mini">
+            <h3>Failure Risk Scoring API</h3>
+            <p>Given recent vibration + temp windows, return a calibrated probability of failure within a timeframe, plus confidence.</p>
+            <ul class="list">
+              <li>Outputs: risk score, time-to-failure band, confidence</li>
+              <li>Best for: CMMS/EAM, telematics dashboards, OEM services</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h3>Fault Type Classification API</h3>
+            <p>Detect patterns consistent with imbalance, misalignment, bearing wear, looseness, lubrication issues - using your data.</p>
+            <ul class="list">
+              <li>Outputs: top fault labels, severity, evidence features</li>
+              <li>Best for: condition monitoring platforms</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h3>Anomaly Prioritization API</h3>
+            <p>Reduce false alarms by ranking assets by urgency using business rules + model signals (criticality, downtime cost).</p>
+            <ul class="list">
+              <li>Outputs: priority queue + recommended next action</li>
+              <li>Best for: reliability teams managing many assets</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h3>Work Order Recommendation API</h3>
+            <p>Turn model output into actionable steps: inspection type, parts checklist, and suggested scheduling window.</p>
+            <ul class="list">
+              <li>Outputs: next best action + rationale</li>
+              <li>Best for: CMMS automation workflows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section">
+      <div class="card">
+        <div class="kicker">Process</div>
+        <h2>A simple, low-risk way to start (do not boil the ocean)</h2>
+        <div class="twoCol" style="margin-top:12px">
+          <div class="mini">
+            <h3>1) Market discovery</h3>
+            <p>Interview 8-12 target users (vendors + integrators + end customers), validate what outputs they will pay for, and map integrations.</p>
+            <div class="tag">2 weeks</div>
+          </div>
+          <div class="mini">
+            <h3>2) Spec the smallest follower API</h3>
+            <p>Pick one leader product to mimic and define a minimal API that matches buyer expectations: inputs, outputs, latency, SLAs.</p>
+            <div class="tag">1 week</div>
+          </div>
+          <div class="mini">
+            <h3>3) Build the pilot with real metrics</h3>
+            <p>Train/evaluate with historical data or curated sample data; track precision/recall, false alarms, lead time before failure.</p>
+            <div class="tag">4-6 weeks</div>
+          </div>
+          <div class="mini">
+            <h3>4) Scale safely</h3>
+            <p>Add monitoring, drift detection, versioning, audit logs, and clear cost controls. Prepare for enterprise security reviews.</p>
+            <div class="tag">Ongoing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="card">
+        <div class="kicker">Engagement</div>
+        <h2>Engagement options</h2>
+        <p class="muted" style="margin:0">Pick a starting point; everything else can evolve from evidence.</p>
+
+        <div class="pricing">
+          <div class="price">
+            <h3>Discovery Sprint</h3>
+            <div class="amt">$7k-$12k <small>/ fixed</small></div>
+            <p>Best if you are validating what the market needs before building APIs.</p>
+            <ul>
+              <li>Buyer interviews + requirements</li>
+              <li>API spec + data contract</li>
+              <li>ROI + rollout plan</li>
+            </ul>
+          </div>
+          <div class="price" style="border-color:rgba(102,227,255,.35)">
+            <h3>Pilot Build</h3>
+            <div class="amt">$25k-$50k <small>/ fixed</small></div>
+            <p>Production-minded pilot: ingest -> model -> API -> monitoring.</p>
+            <ul>
+              <li>Waveform/time-series ingestion</li>
+              <li>Baseline + improved models</li>
+              <li>API + observability</li>
+            </ul>
+          </div>
+          <div class="price">
+            <h3>Retainer</h3>
+            <div class="amt">$8k-$20k <small>/ month</small></div>
+            <p>Ongoing improvements, new endpoints, cost optimization, and support.</p>
+            <ul>
+              <li>Model refresh + drift handling</li>
+              <li>New use cases / integrations</li>
+              <li>Enterprise hardening</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <div class="kicker">FAQ</div>
+        <h2>Common questions</h2>
+        <div class="faq">
+          <details>
+            <summary>Do we need an API first, or market discovery first?</summary>
+            <p>In sensors/maintenance, discovery first usually wins: validate what outputs (risk score, fault label, work-order suggestion) customers will actually pay for, then build the smallest API that matches their workflow.</p>
+          </details>
+          <details>
+            <summary>Can you work with limited data?</summary>
+            <p>Yes. We can start with feature engineering + baselines, use public datasets for early prototyping, and design a data contract to improve continuously once deployments begin.</p>
+          </details>
+          <details>
+            <summary>What does production-grade mean here?</summary>
+            <p>Versioned endpoints, auth, audit logs, latency targets, monitoring/drift, and a clear plan for model updates - so your customers can rely on it.</p>
+          </details>
+          <details>
+            <summary>Do you support multiple user types?</summary>
+            <p>Yes: (1) end customers who send data and get predictions, (2) integrators who need tooling & docs, and (3) platform vendors who embed the API into products.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="card">
+        <div class="kicker">Contact</div>
+        <h2>Let's talk about your sensor + AI roadmap</h2>
+        <p class="muted" style="margin:0">
+          Send a short note. Include your sensor types, sampling rates, and what failure means in your world.
+        </p>
+
+        <form class="form" action="#" method="post" onsubmit="return false;">
+          <input class="input" type="text" name="name" placeholder="Your name" />
+          <input class="input" type="email" name="email" placeholder="Work email" />
+          <input class="input" type="text" name="company" placeholder="Company / Product" />
+          <textarea class="input" name="message" placeholder="What are you building? What data do you have? What outcome do you want?"></textarea>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn primary" href="mailto:bigdatatech.us@gmail.com?subject=AI%20APIs%20for%20Sensor%20Data%20-%20Intro">Email me</a>
+            <a class="btn" href="https://www.linkedin.com/in/govip/" target="_blank" rel="noreferrer">Message on LinkedIn</a>
+          </div>
+          <div class="note">
+            Tip: If you want this form to submit without backend work, plug in Formspree/Basin and replace the <span class="mono">action</span> URL.
+          </div>
+        </form>
+
+        <div class="footer">
+          <div>© <span id="year"></span> BigData Tech Consulting • AI APIs for sensor-based industry</div>
+          <div>
+            <a href="#top" style="text-decoration:none; color:var(--muted)">Back to top ↑</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
